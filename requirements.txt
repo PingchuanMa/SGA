@@ -1,0 +1,17 @@
+numpy==1.26.4
+tqdm==4.66.4
+trimesh==4.4.0
+pyvista==0.43.8
+tensorboard==2.16.2
+
+--find-links https://download.pytorch.org/whl/torch_stable.html
+torch==2.1.2+cu121
+torchaudio==2.1.2+cu121
+torchvision==0.16.2+cu121
+
+warp-lang==1.1.0
+anthropic==0.26.1
+mistralai==0.3.0
+openai==1.30.4
+
+-e .
