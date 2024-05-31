@@ -14,28 +14,33 @@ def main():
     program_path = root / 'entry' / 'agent.py'
     base_cmds = [python_path, program_path]
 
-    base_args = get_script_parser().parse_args()
+    parser = get_script_parser()
+    parser.add_argument('--llm', type=str, default='openai-gpt-4-1106-preview', choices=[
+        'openai-gpt-4-1106-preview',
+        'openai-gpt-3.5-turbo-0125',
+        'mistral-open-mixtral-8x7b',
+        'anthropic-claude-3-sonnet-20240229',
+    ])
+    base_args = parser.parse_args()
     base_args = vars(base_args)
 
     base_args['overwrite'] = True
 
     my_env = os.environ.copy()
-    # my_env['CUDA_VISIBLE_DEVICES'] = str(base_args['gpu'])
+    my_env['CUDA_VISIBLE_DEVICES'] = str(base_args['gpu'])
 
     timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
 
     for seed in range(5):
         args = base_args | {
             'seed': seed,
-            'path': f'gpt35/invent_plasticine_from_identity/{seed:04d}',
-            'dataset_path': 'dataset/plasticine',
-            'llm': 'openai-gpt-3.5-turbo-0125',
+            'path': f'{base_args["llm"]}/invent_sand_from_identity/{seed:04d}',
+            'dataset_path': 'dataset/sand',
             'llm.primitives': '(identity)',
             'llm.entry': 'plasticity',
-            'physics.env.physics': 'identity',
-            'physics.env.physics.elasticity': 'sigma',
-            'optim.alpha_position': 1e5,
+            'optim.alpha_position': 1e4,
             'optim.alpha_velocity': 1e1,
+            'physics.env.physics': 'identity',
         }
 
         cmds = base_cmds + dict_to_cmds(args)
