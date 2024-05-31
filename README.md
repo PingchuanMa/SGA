@@ -1,8 +1,8 @@
+<div align="center">
+
 # Scientific Generative Agent
 
 [![arXiv](https://img.shields.io/badge/ICML2024-2405.09783-b31b1b.svg)](https://arxiv.org/abs/2405.09783)
-
-<div align="center">
 
 **Tl;dr: We propose a bilevel optimization framework for physical scientific discovery where (1) LLMs optimize the discrete scientific hypothesis and (2) physical simulations optimize the continuous parameters.**
 
